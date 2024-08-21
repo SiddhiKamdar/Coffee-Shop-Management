@@ -303,12 +303,12 @@
                     <span>Customer Table</span>
                 </a>
             </li>
-            <li class="nav-item">
+            @* <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="Email" asp-action="Index">
                     <i class="bi bi-envelope"></i>
                     Send Email
                 </a>
-            </li>
+            </li> *@
 
 
         </ul>
@@ -352,5 +352,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <a asp-area="" asp-controller="Email" asp-action="Index" id="email-button" class="floating-button" title="Send Email">
+        <i class="bi bi-envelope"></i>
+    </a>
 </body>
 </html>
