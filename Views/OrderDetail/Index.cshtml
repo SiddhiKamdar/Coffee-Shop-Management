@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataTable;
+@using System.Data
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div></div> 
+    <a class="btn btn-primary" asp-area="" asp-controller="OrderDetail" asp-action="Form">
+        <i class="bi bi-plus-lg"></i> Add
+    </a>
+</div>
+<h6 class="text-danger">@TempData["Error Message"]</h6>
+<table class="table">
+    <thead>
+    <tr>
+        <th>OrderDetailID</th>
+        <th>OrderID</th>
+        <th>ProductID</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+        <th>Total Amount </th>
+        <th>UserID</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    @foreach (DataRow dataRow in Model.Rows)
+    {
+        <tr>
+            <td>@dataRow["OrderDetailID"]</td>
+            <td>@dataRow["OrderID"]</td>
+            <td>@dataRow["ProductID"]</td>
+            <td>@dataRow["Quantity"]</td>
+            <td>@dataRow["Amount"]</td>
+            <td>@dataRow["TotalAmount"]</td>
+            <td>@dataRow["UserID"]</td>
+            <td>
+                <a asp-area="" asp-controller="OrderDetail" asp-action="Form" class="btn btn-outline-warning btn-sm">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <form method="post" asp-controller="OrderDetail" asp-action="OrderDetailDelete">
+                    <input type="hidden" name="OrderDetailID" value="@dataRow["OrderDetailID"]" />
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

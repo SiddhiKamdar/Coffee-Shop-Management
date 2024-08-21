@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CoffeeShopManagment.Models.OrderModel
+
+<div class="container">
+
+    <section class="section">
+        <div class="row">
+            <div class="col">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Order</h5>
+
+                        <!-- General Form Elements -->
+                        <form asp-controller="Order" asp-action="OrderSave" method="post">
+                            <div class="row mb-3">
+                                <label asp-for="OrderDate" for="inputText" class="col-sm-2 col-form-label">Order Date</label>
+                                <div class="col-sm-10">
+                                    <input asp-for="OrderDate" type="date" class="form-control">
+                                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="CustomerID"class="col-sm-2 col-form-label">Customer Name</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="CustomerID" asp-items="@(new SelectList(ViewBag.CustomerList, "CustomerID", "CustomerName"))">
+                                        <option value="">Select Customer</option>
+                                    </select>
+                                    <span asp-validation-for="CustomerID" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="PaymentMode" class="col-sm-2 col-form-label">Payment Mode</label>
+                                <div class="col-sm-10">
+                                    <select asp-for="PaymentMode"class="form-select" aria-label="Default select example">
+                                        <option value="">Open this select menu</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <span asp-validation-for="PaymentMode" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="TotalAmount" for="inputText" class="col-sm-2 col-form-label">Total Amount</label>
+                                <div class="col-sm-10">
+                                    <input asp-for="TotalAmount" type="number" class="form-control">
+                                    <span asp-validation-for="TotalAmount" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label asp-for="ShippingAddress" for="inputPassword" class="col-sm-2 col-form-label">Shipping Address</label>
+                                <div class="col-sm-10">
+                                    <textarea asp-for="ShippingAddress" class="form-control" style="height: 100px"></textarea>
+                                    <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label asp-for="UserID" class="col-sm-2 col-form-label"> User Name</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                                        <option value="">Select User</option>
+                                    </select>
+                                    <span asp-validation-for="UserID" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                                </div>
+                            </div>
+
+                        </form><!-- End General Form Elements -->
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

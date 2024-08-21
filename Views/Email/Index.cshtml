@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Send Email";
+}
+
+<h2>Send Email</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<form asp-action="SendEmail" method="post">
+    <div class="form-group">
+        <label for="toEmail">Recipient Email</label>
+        <input type="email" name="toEmail" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" name="subject" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="body">Message</label>
+        <textarea name="body" class="form-control" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send Email</button>
+</form>
