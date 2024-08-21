@@ -1,8 +1,8 @@
-# Ignore appsettings files with sensitive information
+# appsettings files with sensitive information
 appsettings.Development.json
 appsettings.Local.json
 
-# Ignore build and output directories
+# build and output directories
 bin/
 obj/
 
