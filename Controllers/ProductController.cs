@@ -113,15 +113,54 @@ namespace CoffeeShopManagment.Controllers
         {
             if (ModelState.IsValid)
             {
+                string connectionString = this.configuration.GetConnectionString("ConnectionString");
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand checkUserCommand = connection.CreateCommand())
+                    {
+                        checkUserCommand.CommandType = CommandType.Text;
+                        checkUserCommand.CommandText = "SELECT COUNT(*) FROM [dbo].[User] WHERE UserID = @UserId";
+                        checkUserCommand.Parameters.Add("@UserId", SqlDbType.Int).Value = productModel.UserId;
+
+                        int userCount = (int)checkUserCommand.ExecuteScalar();
+                        if (userCount == 0)
+                        {
+                            ModelState.AddModelError("", "Invalid UserId");
+                            return View("Index", GetProductsData());
+                        }
+                    }
+
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        if (productModel.ProductId == null)
+                        {
+                            command.CommandText = "PR_Product_Insert";
+                        }
+                        else
+                        {
+                            command.CommandText = "PR_Product_Update";
+                            command.Parameters.Add("@ProductId", SqlDbType.Int).Value = productModel.ProductId;
+                        }
+                        command.Parameters.Add("@ProductName", SqlDbType.VarChar).Value = productModel.ProductName;
+                        command.Parameters.Add("@ProductCode", SqlDbType.VarChar).Value = productModel.ProductCode;
+                        command.Parameters.Add("@ProductPrice", SqlDbType.Decimal).Value = productModel.ProductPrice;
+                        command.Parameters.Add("@Description", SqlDbType.VarChar).Value = productModel.Description;
+                        command.Parameters.Add("@UserId", SqlDbType.Int).Value = productModel.UserId;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
                 return RedirectToAction("Index");
-
             }
-            else
-            {
-                return View("Form", productModel);
 
-            }
+            DataTable dataTable = GetProductsData();
+            return View("Index", dataTable);
         }
+
+
         public IActionResult ProductDelete(int ProductID)
         {
             try

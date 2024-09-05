@@ -4,8 +4,7 @@ namespace CoffeeShopManagment.Models
 {
     public class ProductModel
     {
-        [Required(ErrorMessage = "This Field is Compulsory")]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         [Required(ErrorMessage = "This Field is Compulsory")]
         public string ProductName { get; set; }
         [Required(ErrorMessage = "This Field is Compulsory")]
