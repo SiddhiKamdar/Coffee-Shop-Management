@@ -1,53 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@model DataTable;
+﻿@model DataTable
 @using System.Data
+
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <div></div>
-    <a class="btn btn-primary" asp-area="" asp-controller="User" asp-action="Form">
+    <div></div> <!-- Placeholder for flex alignment -->
+    <a class="btn btn-primary" asp-controller="User" asp-action="Form">
         <i class="bi bi-plus-lg"></i> Add
     </a>
 </div>
+
 <h6 class="text-danger">@TempData["Error Message"]</h6>
 
 <table class="table">
     <thead>
-    <tr>
-        <th>UserId</th>
-        <th>UserName</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Address</th>
-        <th>MobileNo </th>
-        <th>IsActive</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    @foreach (DataRow dataRow in Model.Rows)
-    {
         <tr>
-            <td>@dataRow["UserId"]</td>
-            <td>@dataRow["UserName"]</td>
-            <td>@dataRow["Email"]</td>
-            <td>@dataRow["Password"]</td>
-            <td>@dataRow["Address"]</td>
-            <td>@dataRow["MobileNo"]</td>
-            <td>@dataRow["IsActive"]</td>
-            <td>
-                <a asp-area="" asp-controller="User" asp-action="Index" class="btn btn-outline-warning btn-sm">
-                    <i class="bi bi-pencil-square"></i>
-                </a>
-                <form method="post" asp-controller="User" asp-action="UserDelete">
-                    <input type="hidden" name="UserID" value="@dataRow["UserID"]" />
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </form>
-            </td>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Address</th>
+            <th>MobileNo</th>
+            <th>IsActive</th>
+            <th>Actions</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (DataRow dataRow in Model.Rows)
+        {
+            <tr>
+                <td>@dataRow["UserId"]</td>
+                <td>@dataRow["UserName"]</td>
+                <td>@dataRow["Email"]</td>
+                <td>@dataRow["Password"]</td>
+                <td>@dataRow["Address"]</td>
+                <td>@dataRow["MobileNo"]</td>
+                <td>@dataRow["IsActive"]</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <a asp-controller="User" asp-action="Form" asp-route-userId="@dataRow["UserId"]" class="btn btn-outline-warning btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form method="post" asp-controller="User" asp-action="UserDelete" class="mb-0">
+                            <input type="hidden" name="userId" value="@dataRow["UserId"]" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

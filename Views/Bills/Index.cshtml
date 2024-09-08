@@ -7,6 +7,7 @@
         <i class="bi bi-plus-lg"></i> Add
     </a>
 </div>
+
 <h6 class="text-danger">@TempData["Error Message"]</h6>
 
 <table class="table">
@@ -34,15 +35,17 @@
                 <td>@dataRow["Discount"]</td>
                 <td>@dataRow["NetAmount"]</td>
                 <td>
-                    <a asp-area="" asp-controller="Bills" asp-action="Form" class="btn btn-outline-warning btn-sm">
-                        <i class="bi bi-pencil-square"></i>
-                    </a>
-                    <form method="post" asp-controller="Bills" asp-action="BillDelete">
-                        <input type="hidden" name="BillID" value="@dataRow["BillID"]" />
-                        <button type="submit" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </form>
+                    <div class="d-flex">
+                        <a asp-area="" asp-controller="Bills" asp-action="Form" class="btn btn-outline-warning btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form method="post" asp-controller="Bills" asp-action="BillDelete">
+                            <input type="hidden" name="BillID" value="@dataRow["BillID"]" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         }

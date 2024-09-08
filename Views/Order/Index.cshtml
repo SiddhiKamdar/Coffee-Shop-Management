@@ -6,48 +6,54 @@
 
 @model DataTable;
 @using System.Data
+
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <div></div> 
+    <div></div> <!-- Placeholder for flex alignment -->
     <a class="btn btn-primary" asp-area="" asp-controller="Order" asp-action="Form">
         <i class="bi bi-plus-lg"></i> Add
     </a>
 </div>
+
 <h6 class="text-danger">@TempData["Error Message"]</h6>
 
 <table class="table">
     <thead>
-    <tr>
-        <th>OrderID</th>
-        <th>Order date</th>
-        <th>Customer ID</th>
-        <th>Payment Mode</th>
-        <th>Shipping Address</th>
-        <th>Total Amount </th>
-        <th>User Id</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    @foreach (DataRow dataRow in Model.Rows)
-    {
         <tr>
-            <td>@dataRow["OrderID"]</td>
-            <td>@dataRow["OrderDate"]</td>
-            <td>@dataRow["CustomerID"]</td>
-            <td>@dataRow["PaymentMode"]</td>
-            <td>@dataRow["ShippingAddress"]</td>
-            <td>@dataRow["TotalAmount"]</td>
-            <td>@dataRow["UserID"]</td>
-            <td>
-                <a asp-area="" asp-controller="Order" asp-action="Form" class="btn btn-outline-warning btn-sm">
-                    <i class="bi bi-pencil-square"></i>
-                </a>
-                <form method="post" asp-controller="Order" asp-action="OrderDelete">
-                    <input type="hidden" name="OrderID" value="@dataRow["OrderID"]" />
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </form>
-            </td>
+            <th>OrderID</th>
+            <th>Order Date</th>
+            <th>Customer ID</th>
+            <th>Payment Mode</th>
+            <th>Shipping Address</th>
+            <th>Total Amount</th>
+            <th>User ID</th>
+            <th>Actions</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (DataRow dataRow in Model.Rows)
+        {
+            <tr>
+                <td>@dataRow["OrderID"]</td>
+                <td>@dataRow["OrderDate"]</td>
+                <td>@dataRow["CustomerID"]</td>
+                <td>@dataRow["PaymentMode"]</td>
+                <td>@dataRow["ShippingAddress"]</td>
+                <td>@dataRow["TotalAmount"]</td>
+                <td>@dataRow["UserID"]</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <a asp-area="" asp-controller="Order" asp-action="Form" class="btn btn-outline-warning btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form method="post" asp-controller="Order" asp-action="OrderDelete" class="mb-0">
+                            <input type="hidden" name="OrderID" value="@dataRow["OrderID"]" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
