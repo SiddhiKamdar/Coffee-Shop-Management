@@ -42,12 +42,12 @@
                 <td>@dataRow["MobileNo"]</td>
                 <td>@dataRow["GST No"]</td>
                 <td>@dataRow["CityName"]</td>
-                <td>@dataRow["Pincode"]</td>
+                <td>@dataRow["PinCode"]</td>
                 <td>@dataRow["NetAmount"]</td>
                 <td>@dataRow["UserID"]</td>
                 <td>
                     <div class="d-flex ">
-                        <a asp-area="" asp-controller="Customer" asp-action="Form" class="btn btn-outline-warning btn-sm me-2">
+                        <a asp-area="" asp-controller="Customer" asp-action="Form" asp-route-CustomerID="@dataRow["CustomerID"]" class="btn btn-outline-warning btn-sm me-2">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                         <form method="post" asp-controller="Customer" asp-action="CustomerDelete" class="d-inline">

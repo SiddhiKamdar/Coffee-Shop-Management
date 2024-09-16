@@ -13,29 +13,29 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Order Details</h5>
-
-                        <!-- General Form Elements -->
                         <form asp-controller="OrderDetail" asp-action="OrderDetailSave" method="post">
-                            <div class="row mb-3"> 
+                            @Html.HiddenFor(x => x.OrderDetailID)
+
+
+                            <div class="row mb-3">
                                 <label asp-for="OrderID" class="col-sm-2 col-form-label">Order ID</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" asp-items="@(new SelectList(ViewBag.OrderList, "OrderID", "OrderID"))">
+                                    <select asp-for="OrderID" class="form-control" asp-items="@(new SelectList(ViewBag.OrderList, "OrderID", "OrderID"))">
                                         <option value="">Select Order ID</option>
                                     </select>
                                     <span asp-validation-for="OrderID" class="text-danger"></span>
-
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="ProductID" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" asp-items="@(new SelectList(ViewBag.ProductList, "ProductID", "ProductName"))">
+                                    <select asp-for="ProductID" class="form-control" asp-items="@(new SelectList(ViewBag.ProductList, "ProductID", "ProductName"))">
                                         <option value="">Select Product</option>
                                     </select>
                                     <span asp-validation-for="ProductID" class="text-danger"></span>
-
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label asp-for="Quantity" for="inputText" class="col-sm-2 col-form-label">Quantity</label>
                                 <div class="col-sm-10">
@@ -62,7 +62,7 @@
                             <div class="row mb-3">
                                 <label asp-for="UserID" class="col-sm-2 col-form-label">User Name</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                                    <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                                         <option value="">Select User</option>
                                     </select>
                                     <span asp-validation-for="UserID" class="text-danger"></span>
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
 
-                        </form><!-- End General Form Elements -->
+                        </form>
 
                     </div>
                 </div>

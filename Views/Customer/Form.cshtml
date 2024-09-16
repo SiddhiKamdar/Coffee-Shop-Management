@@ -15,7 +15,8 @@
                         <h5 class="card-title">Customer</h5>
 
                         <!-- General Form Elements -->
-                        <form asp-controller="Customer" asp-action="CustomerSave">
+                        <form asp-controller="Customer" asp-action="CustomerSave" method="post">
+                            @Html.HiddenFor(x => x.CustomerID)
                             <div class="row mb-3">
                                 <label asp-for="CustomerName" for="inputText" class="col-sm-2 col-form-label">Customer Name </label>
                                 <div class="col-sm-10">
@@ -27,7 +28,7 @@
                             <div class="row mb-3">
                                 <label asp-for="HomeAddress" for="inputPassword" class="col-sm-2 col-form-label">Home Address</label>
                                 <div class="col-sm-10">
-                                    <textarea asp-for="HomeAddress"  class="form-control" style="height: 100px"></textarea>
+                                    <textarea asp-for="HomeAddress" class="form-control" style="height: 100px"></textarea>
                                     <span asp-validation-for="HomeAddress" class="text-danger"></span>
 
                                 </div>
@@ -64,17 +65,17 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label asp-for="Pincode"for="inputText" class="col-sm-2 col-form-label">Pin Code </label>
+                                <label asp-for="PinCode" for="inputText" class="col-sm-2 col-form-label">Pin Code </label>
                                 <div class="col-sm-10">
-                                    <input asp-for="Pincode"type="text" class="form-control">
-                                    <span asp-validation-for="Pincode" class="text-danger"></span>
+                                    <input asp-for="PinCode" type="text" class="form-control">
+                                    <span asp-validation-for="PinCode" class="text-danger"></span>
 
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="NetAmount" for="inputText" class="col-sm-2 col-form-label">Net Amount </label>
                                 <div class="col-sm-10">
-                                    <input asp-for="NetAmount"type="number" class="form-control">
+                                    <input asp-for="NetAmount" type="number" class="form-control">
                                     <span asp-validation-for="NetAmount" class="text-danger"></span>
 
                                 </div>
@@ -82,11 +83,10 @@
                             <div class="row mb-3">
                                 <label asp-for="UserID" class="col-sm-2 col-form-label">User Name</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                                    <select asp-for="UserID" class="form-control" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                                         <option value="">Select User</option>
                                     </select>
                                     <span asp-validation-for="UserID" class="text-danger"></span>
-
                                 </div>
                             </div>
 

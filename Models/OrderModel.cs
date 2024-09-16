@@ -7,7 +7,7 @@ namespace CoffeeShopManagment.Models
         [Required(ErrorMessage = "This Field is Compulsory")]
         public int OrderID { get; set; }
         [Required(ErrorMessage = "This Field is Compulsory")]
-        public DateOnly OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         [Required(ErrorMessage = "This Field is Compulsory")]
         public int CustomerID { get; set; }
         [Required(ErrorMessage = "This Field is Compulsory")]

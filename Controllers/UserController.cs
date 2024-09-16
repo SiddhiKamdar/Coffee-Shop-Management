@@ -133,5 +133,45 @@ namespace CoffeeShopManagment.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public IActionResult Login(UserLoginModel userLoginModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    string connectionString = this.configuration.GetConnectionString("ConnectionString");
+                    SqlConnection sqlConnection = new SqlConnection(connectionString);
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                    sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                    sqlCommand.CommandText = "PR_User_Login";
+                    sqlCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userLoginModel.UserName;
+                    sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar).Value = userLoginModel.Password;
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(sqlDataReader);
+                    foreach (DataRow dr in dataTable.Rows)
+                    {
+                        HttpContext.Session.SetString("UserID", dr["UserID"].ToString());
+                        HttpContext.Session.SetString("UserName", dr["UserName"].ToString());
+                    }
+
+                    return RedirectToAction("Index", "Product");
+                }
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = e.Message;
+            }
+
+            return RedirectToAction("Login");
+        }
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "User");
+        }
     }
 }

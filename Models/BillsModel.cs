@@ -4,7 +4,6 @@ namespace CoffeeShopManagment.Models
 {
     public class BillsModel
     {
-        [Required]
         public int BillID { get; set; }
 
         [Required]

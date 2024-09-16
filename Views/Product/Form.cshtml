@@ -57,7 +57,6 @@
                                     <select class="form-control" asp-for="UserId" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                                         <option value="">Select User</option>
                                     </select>
-
                                     <span asp-validation-for="UserId" class="text-danger"></span>
 
                                 </div>

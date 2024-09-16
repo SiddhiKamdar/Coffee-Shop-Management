@@ -14,9 +14,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Order</h5>
-
-                        <!-- General Form Elements -->
+                        
                         <form asp-controller="Order" asp-action="OrderSave" method="post">
+                            @Html.HiddenFor(x => x.OrderID)
                             <div class="row mb-3">
                                 <label asp-for="OrderDate" for="inputText" class="col-sm-2 col-form-label">Order Date</label>
                                 <div class="col-sm-10">
@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label asp-for="UserID" class="col-sm-2 col-form-label"> User Name</label>
+                                <label asp-for="UserID" class="col-sm-2 col-form-label">User Name</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
                                         <option value="">Select User</option>
