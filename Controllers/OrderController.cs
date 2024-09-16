@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace CoffeeShopManagment.Controllers
 {
+    //[CheckAccess]
     public class OrderController : Controller
     {
         private readonly IConfiguration configuration;
@@ -32,7 +34,8 @@ namespace CoffeeShopManagment.Controllers
             }
         }
 
-        public IActionResult Form(int? OrderId)
+        [HttpGet]
+        public IActionResult Form(int OrderID)
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
             SqlConnection connection1 = new SqlConnection(connectionString);
@@ -82,7 +85,7 @@ namespace CoffeeShopManagment.Controllers
             SqlCommand command = connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "PR_Order_SelectByPK";
-            command.Parameters.AddWithValue("@OrderID", OrderId);
+            command.Parameters.AddWithValue("@OrderID", OrderID);
             SqlDataReader reader = command.ExecuteReader();
             DataTable table = new DataTable();
             table.Load(reader);
@@ -103,7 +106,6 @@ namespace CoffeeShopManagment.Controllers
 
             return View("Form", orderModel);
         }
-
 
         [HttpPost]
         public IActionResult OrderSave(OrderModel orderModel)
@@ -144,7 +146,6 @@ namespace CoffeeShopManagment.Controllers
             return View("Form", orderModel);
         }
 
-
         [HttpPost]
         public IActionResult OrderDelete(int orderId)
         {
@@ -169,4 +170,5 @@ namespace CoffeeShopManagment.Controllers
             }
         }
     }
+
 }

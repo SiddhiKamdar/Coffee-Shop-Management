@@ -5,6 +5,7 @@ using System.Data;
 
 namespace CoffeeShopManagment.Controllers
 {
+    //[CheckAccess]
     public class BillsController : Controller
     {
         private IConfiguration configuration;

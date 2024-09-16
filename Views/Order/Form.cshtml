@@ -16,7 +16,8 @@
                         <h5 class="card-title">Order</h5>
                         
                         <form asp-controller="Order" asp-action="OrderSave" method="post">
-                            @Html.HiddenFor(x => x.OrderID)
+                            <input type="hidden" asp-for="OrderID" />
+
                             <div class="row mb-3">
                                 <label asp-for="OrderDate" for="inputText" class="col-sm-2 col-form-label">Order Date</label>
                                 <div class="col-sm-10">
@@ -40,9 +41,10 @@
                                 <div class="col-sm-10">
                                     <select asp-for="PaymentMode"class="form-select" aria-label="Default select example">
                                         <option value="">Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="PayPal">PayPal</option>
+                                        <option value="Credit Card">Credit Card</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Debit Card">Debit Card</option>
                                     </select>
                                     <span asp-validation-for="PaymentMode" class="text-danger"></span>
 
