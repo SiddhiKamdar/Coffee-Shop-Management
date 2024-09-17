@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeShopManagment.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     public class EmailController : Controller
     {
         private readonly IEmailSender _emailSender;

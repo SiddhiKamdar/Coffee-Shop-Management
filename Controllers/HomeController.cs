@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace CoffeeShopManagment.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

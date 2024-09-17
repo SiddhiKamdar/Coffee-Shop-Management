@@ -5,7 +5,7 @@ using System.Data;
 
 namespace CoffeeShopManagment.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     public class BillsController : Controller
     {
         private IConfiguration configuration;
@@ -122,31 +122,31 @@ namespace CoffeeShopManagment.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                string connectionString = this.configuration.GetConnectionString("ConnectionString");
-                using (SqlConnection connection = new SqlConnection(connectionString))
+            string connectionString = this.configuration.GetConnectionString("ConnectionString");
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                if (model.BillID == 0)
                 {
-                    connection.Open();
-                    SqlCommand command = connection.CreateCommand();
-                    command.CommandType = CommandType.StoredProcedure;
-                    if (model.BillID == 0)
-                    {
-                        command.CommandText = "PR_Bills_Insert";
-                    }
-                    else
-                    {
-                        command.CommandText = "PR_Bills_Update";
-                        command.Parameters.Add("@BillID", SqlDbType.Int).Value = model.BillID;
-                    }
-                    command.Parameters.Add("@BillNumber", SqlDbType.VarChar).Value = model.BillNumber;
-                    command.Parameters.Add("@BillDate", SqlDbType.DateTime).Value = model.BillDate;
-                    command.Parameters.Add("@OrderID", SqlDbType.Int).Value = model.OrderID;
-                    command.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = model.TotalAmount;
-                    command.Parameters.Add("@Discount", SqlDbType.Decimal).Value = model.Discount;
-                    command.Parameters.Add("@NetAmount", SqlDbType.Decimal).Value = model.NetAmount;
-                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
-                    command.ExecuteNonQuery();
-                    return RedirectToAction("Index");
+                    command.CommandText = "PR_Bills_Insert";
                 }
+                else
+                {
+                    command.CommandText = "PR_Bills_Update";
+                    command.Parameters.Add("@BillID", SqlDbType.Int).Value = model.BillID;
+                }
+                command.Parameters.Add("@BillNumber", SqlDbType.VarChar).Value = model.BillNumber;
+                command.Parameters.Add("@BillDate", SqlDbType.DateTime).Value = model.BillDate;
+                command.Parameters.Add("@OrderID", SqlDbType.Int).Value = model.OrderID;
+                command.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = model.TotalAmount;
+                command.Parameters.Add("@Discount", SqlDbType.Decimal).Value = model.Discount;
+                command.Parameters.Add("@NetAmount", SqlDbType.Decimal).Value = model.NetAmount;
+                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
+                command.ExecuteNonQuery();
+                return RedirectToAction("Index");
+            }
             //}
 
             // Reload dropdowns if ModelState is not valid

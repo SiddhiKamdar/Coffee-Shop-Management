@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace CoffeeShopManagment.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     public class ProductController : Controller
     {
         private IConfiguration configuration;

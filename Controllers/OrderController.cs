@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace CoffeeShopManagment.Controllers
 {
-    //[CheckAccess]
+    [CheckAccess]
     public class OrderController : Controller
     {
         private readonly IConfiguration configuration;
