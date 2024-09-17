@@ -196,9 +196,9 @@ namespace CoffeeShopManagment.Controllers
             catch (Exception e)
             {
                 TempData["ErrorMessage"] = e.Message;
-                return RedirectToAction("Register");
+                return View("Register");
             }
-            return RedirectToAction("Register");
+            return View("Register");
         }
 
         [HttpPost]
