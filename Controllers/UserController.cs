@@ -158,7 +158,7 @@ namespace CoffeeShopManagment.Controllers
                         HttpContext.Session.SetString("UserName", dr["UserName"].ToString());
                     }
 
-                    return RedirectToAction("Index", "Product");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception e)
