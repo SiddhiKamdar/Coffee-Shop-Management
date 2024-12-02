@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 
 namespace CoffeeShopManagment.Controllers
 {
-    //[CheckAccess]
     public class UserController : Controller
     {
         private readonly IConfiguration configuration;
@@ -15,6 +14,7 @@ namespace CoffeeShopManagment.Controllers
             configuration = _configuration;
         }
 
+        #region UserList
         public IActionResult Index()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -32,7 +32,9 @@ namespace CoffeeShopManagment.Controllers
                 }
             }
         }
+        #endregion
 
+        #region UserForm
         public IActionResult Form(int? userId)
         {
             if (userId.HasValue)
@@ -71,8 +73,10 @@ namespace CoffeeShopManagment.Controllers
             }
             return View(new UserModel());
         }
+        #endregion
 
-        [HttpPost]
+        #region UserSave
+
         public IActionResult UserSave(UserModel userModel)
         {
             if (ModelState.IsValid)
@@ -110,8 +114,9 @@ namespace CoffeeShopManagment.Controllers
             }
             return View("Form", userModel);
         }
+        #endregion
 
-        [HttpPost]
+        #region UserDelete
         public IActionResult UserDelete(int userId)
         {
             try
@@ -134,7 +139,9 @@ namespace CoffeeShopManagment.Controllers
                 return RedirectToAction("Index");
             }
         }
+        #endregion
 
+        #region Login
         public IActionResult Login(UserLoginModel userLoginModel)
         {
             try
@@ -169,9 +176,9 @@ namespace CoffeeShopManagment.Controllers
             return View("Login");
 
         }
+        #endregion
 
-
-
+        #region Register
         public IActionResult Register(UserRegisterModel userRegisterModel)
         {
             try
@@ -200,13 +207,17 @@ namespace CoffeeShopManagment.Controllers
             }
             return View("Register");
         }
+        #endregion
 
+        #region Logout
         [HttpPost]
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "User");
         }
+        #endregion
 
     }
 }

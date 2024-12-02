@@ -14,6 +14,7 @@ namespace CoffeeShopManagment.Controllers
         {
             configuration = _configuration;
         }
+        #region OrderDetailList
         public IActionResult Index()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -27,6 +28,8 @@ namespace CoffeeShopManagment.Controllers
             dataTable.Load(reader);
             return View(dataTable);
         }
+        #endregion
+        #region ODForm
         public IActionResult Form(int OrderDetailID)
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -111,6 +114,8 @@ namespace CoffeeShopManagment.Controllers
 
             return View("Form", orderDetailModel);
         }
+        #endregion
+        #region ODSave
         public IActionResult OrderDetailSave(OrderDetailModel orderDetailModel)
         {
             if (orderDetailModel.OrderID <= 0)
@@ -152,6 +157,9 @@ namespace CoffeeShopManagment.Controllers
             }
             return View("Form", orderDetailModel);
         }
+        #endregion
+
+        #region ODDelete
         public IActionResult OrderDetailDelete(int OrderDetailID)
         {
             try
@@ -173,5 +181,6 @@ namespace CoffeeShopManagment.Controllers
             }
 
         }
+        #endregion
     }
 }

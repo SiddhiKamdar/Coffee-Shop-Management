@@ -15,6 +15,7 @@ namespace CoffeeShopManagment.Controllers
         {
             configuration = _configuration;
         }
+        #region ExportExcel
         public ActionResult ExportToExcel()
         {
 
@@ -46,8 +47,9 @@ namespace CoffeeShopManagment.Controllers
                 return File(stream, contentType, fileName);
             }
         }
+        #endregion
 
-
+        #region ProductTable
         private DataTable GetProductsData()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -72,8 +74,9 @@ namespace CoffeeShopManagment.Controllers
                 }
             }
         }
+        #endregion
 
-
+        #region ProductList
         public IActionResult Index()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -87,6 +90,8 @@ namespace CoffeeShopManagment.Controllers
             dataTable.Load(reader);
             return View(dataTable);
         }
+        #endregion
+        #region ProductForm
         public IActionResult Form()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -109,6 +114,8 @@ namespace CoffeeShopManagment.Controllers
             ViewBag.UserList = userList;
             return View();
         }
+        #endregion
+        #region ProductSave
         public IActionResult ProductSave(ProductModel productModel)
         {
             if (ModelState.IsValid)
@@ -159,6 +166,8 @@ namespace CoffeeShopManagment.Controllers
             DataTable dataTable = GetProductsData();
             return View("Index", dataTable);
         }
+        #endregion
+        #region ProductEdit
         public IActionResult Edit(int ProductId)
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -197,7 +206,8 @@ namespace CoffeeShopManagment.Controllers
 
             return RedirectToAction("Index");
         }
-
+        #endregion
+        #region LoadDD
         private void LoadUserDropdown()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -226,7 +236,8 @@ namespace CoffeeShopManagment.Controllers
                 }
             }
         }
-
+        #endregion
+        #region ProductDelete
 
         public IActionResult ProductDelete(int ProductID)
         {
@@ -249,5 +260,7 @@ namespace CoffeeShopManagment.Controllers
             }
 
         }
+        #endregion
     }
+
 }

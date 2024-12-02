@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using System.Data
+@{
+    ViewData["Title"] = "Country List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Country</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="HomeMaster" asp-action="Index">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Country List</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-end align-items-center">
+        <a class="btn btn-outline-primary" asp-controller="Country" asp-action="CountryAddEdit">
+            <i class="bi bi-plus-lg"></i>&nbsp;Add Country
+        </a>
+    </div>
+</div><!-- End Page Title -->
+@if (TempData["CountryInsertMsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["CountryInsertMsg"]
+    </div>
+}
+
+<div class="mb-3">
+    <input type="text" class="form-control" id="countrySearch" placeholder="Search Any">
+</div>
+
+<table class="table table-hover table-header-fixed">
+    <thead>
+        <tr>
+            <th scope="col">Country Name</th>
+            <th scope="col">Country Code</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody id="countryTable">
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+                <td>@row["CountryName"]</td>
+                <td>@row["CountryCode"]</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-success btn-xs" asp-controller="Country" asp-action="CountryAddEdit" asp-route-CountryID="@row["CountryID"]">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-danger btn-xs" asp-controller="Country" asp-action="Delete" asp-route-CountryID="@row["CountryID"]" onclick="return confirm('Are you sure you want to delete this country?');">
+                        <i class="bi bi-x"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#countrySearch").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#countryTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+}

@@ -15,6 +15,8 @@ namespace CoffeeShopManagment.Controllers
         {
             configuration = _configuration;
         }
+
+        #region CustomerList
         public IActionResult Index()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -28,6 +30,8 @@ namespace CoffeeShopManagment.Controllers
             dataTable.Load(reader);
             return View(dataTable);
         }
+        #endregion
+        #region CustomerForm
         public IActionResult Form(int? customerID)
         {
             // Fetch UserList for the dropdown
@@ -75,12 +79,12 @@ namespace CoffeeShopManagment.Controllers
 
             return View(customerModel);
         }
-
+        #endregion
+        #region CustomerSave
         public IActionResult CustomerSave(CustomerModel model)
         
         {
-            //if (ModelState.IsValid)
-            //{
+            
                 string connectionString = this.configuration.GetConnectionString("ConnectionString");
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
@@ -106,9 +110,11 @@ namespace CoffeeShopManagment.Controllers
                 command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
                 command.ExecuteNonQuery();
                 return RedirectToAction("Index");
-            //}
+            
             return View("Form", model);
         }
+        #endregion
+        #region CustomerDelete
         public IActionResult CustomerDelete(int CustomerID)
         {
             try
@@ -130,6 +136,6 @@ namespace CoffeeShopManagment.Controllers
             }
 
         }
-       
+        #endregion
     }
 }

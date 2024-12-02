@@ -15,7 +15,7 @@ namespace CoffeeShopManagment.Controllers
         {
             configuration = _configuration;
         }
-
+        #region OrderDisplay
         public IActionResult Index()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -33,8 +33,9 @@ namespace CoffeeShopManagment.Controllers
                 }
             }
         }
-
+        #endregion
         [HttpGet]
+        #region OrderForm
         public IActionResult Form(int OrderID)
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -106,8 +107,9 @@ namespace CoffeeShopManagment.Controllers
 
             return View("Form", orderModel);
         }
-
+        #endregion
         [HttpPost]
+        #region OrderSave
         public IActionResult OrderSave(OrderModel orderModel)
         {
             if (orderModel.UserID <= 0)
@@ -145,8 +147,9 @@ namespace CoffeeShopManagment.Controllers
             }
             return View("Form", orderModel);
         }
-
+        #endregion
         [HttpPost]
+        #region OrderDelete
         public IActionResult OrderDelete(int orderId)
         {
             try
@@ -169,6 +172,7 @@ namespace CoffeeShopManagment.Controllers
                 return RedirectToAction("Index");
             }
         }
+        #endregion
     }
 
 }

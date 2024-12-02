@@ -20,7 +20,7 @@
                         <div class="d-flex justify-content-center py-4">
                             <a class="logo d-flex align-items-center w-auto">
                                 <img src="~/img/logo.png" alt="">
-                                <span class="d-none d-lg-block">NiceAdmin</span>
+                                <span class="d-none d-lg-block">Coffee Shop</span>
                             </a>
                         </div><!-- End Logo -->
 
@@ -35,18 +35,14 @@
 
                                 <form class="row g-3 needs-validation" asp-action="Login" asp-controller="User">
 
-                                    <div class="col-12">
-                                        <label for="yourUsername" class="form-label">Username</label>
-                                        <div class="input-group has-validation">
-                                            <span class="input-group-text" id="inputGroupPrepend"></span>
-                                            <input type="text" asp-for="UserName" class="form-control" id="yourUsername">
-                                            <span asp-validation-for="UserName" class="text-danger"></span>
-                                        </div>
+                                    <div class="form-group">
+                                        <label asp-for="UserName"></label>
+                                        <input asp-for="UserName" class="form-control" />
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
                                     </div>
-
-                                    <div class="col-12">
-                                        <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" asp-for="Password" class="form-control" id="yourPassword">
+                                    <div class="form-group">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" class="form-control" type="password" />
                                         <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
 

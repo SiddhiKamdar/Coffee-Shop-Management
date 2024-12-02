@@ -14,7 +14,7 @@ namespace CoffeeShopManagment.Controllers
         {
             configuration = _configuration;
         }
-
+        #region BillList
         public IActionResult Index()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -30,7 +30,9 @@ namespace CoffeeShopManagment.Controllers
                 return View(dataTable);
             }
         }
+        #endregion
 
+        #region BillForm
         public IActionResult Form(int? BillID)
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -117,7 +119,9 @@ namespace CoffeeShopManagment.Controllers
                 return View("Form", billsModel);
             }
         }
+        #endregion
 
+        #region BillSave
         public IActionResult BillSave(BillsModel model)
         {
             //if (ModelState.IsValid)
@@ -153,7 +157,9 @@ namespace CoffeeShopManagment.Controllers
             LoadDropdowns();
             return View("Form", model);
         }
+        #endregion
 
+        #region BillDelete
         public IActionResult BillDelete(int BillID)
         {
             try
@@ -176,7 +182,9 @@ namespace CoffeeShopManagment.Controllers
                 return RedirectToAction("Index");
             }
         }
+        #endregion
 
+        #region DropDowns
         private void LoadDropdowns()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -231,5 +239,6 @@ namespace CoffeeShopManagment.Controllers
                 }
             }
         }
+        #endregion
     }
 }
